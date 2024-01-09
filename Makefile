@@ -3,8 +3,12 @@ INSTALL_DIR=/usr/local/bin
 ARCH=$(shell uname -m)
 VERSION=$(shell git describe --tags --always)
 
+.PHONY: download
+download:
+	go get github.com/sashabaranov/go-openai
+
 .PHONY: build
-build:
+build: download
 	CGO_ENABLED=0 go build -o $(BINARY_NAME)
 
 .PHONY: install
